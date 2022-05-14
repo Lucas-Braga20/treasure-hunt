@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Caça do Tesouro</title>
+
+    <link 
+      rel="stylesheet" 
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style type="text/tailwindcss">
+      @tailwind base;
+      @tailwind components;
+      @tailwind utilities;
+      .row {
+        @apply flex flex-row;
+      }
+      .col {
+        @apply w-7 h-7 transition border border-gray-800 hover:bg-emerald-500 transition cursor-pointer
+        flex justify-center items-center text-yellow-400;
+      }
+      .row:first-child .col:first-child {
+        @apply rounded-tl;
+      }
+      .row:first-child .col:last-child {
+        @apply rounded-tr;
+      }
+      .row:last-child .col:first-child {
+        @apply rounded-bl;
+      }
+      .row:last-child .col:last-child {
+        @apply rounded-br;
+      }
+      .white {
+        @apply bg-emerald-300;
+      }
+      .dark {
+        @apply bg-emerald-400;
+      }
+      .opened {
+        @apply bg-emerald-600 hover:bg-emerald-600;
+      }
+      .alert {
+        @apply w-full px-3 py-2 bg-white rounded transition font-light text-sm;
+      }
+      .alert-danger {
+        @apply text-white bg-gradient-to-r from-red-600 to-red-700;
+      }
+      .alert-success {
+        @apply text-white bg-gradient-to-r from-green-600 to-green-700;
+      }
+    </style>
+
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+      select {
+        font-size: 12px !important;
+      }
+      .icon-outline {
+        text-shadow: 0px 0px 2px black, 0px 0px 2px black, 0px 0px 2px black, 0px 0px 2px black;
+      }
+    </style>
+
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="w-screen h-screen flex flex-col overflow-auto items-center justify-center bg-gradient-to-b from-slate-800 to-slate-900">
+      <div class="flex flex-col justify-center">
+        <div class="mb-3">
+          <h1 class="text-5xl text-white text-center text-transparent bg-clip-text bg-gradient-to-b from-yellow-400 to-amber-600 uppercase"
+            style="font-family: 'Fredoka One'">
+            <i class="fa-solid fa-coins"></i>
+            Caça ao tesouro
+          </h1>
+        </div>
+        <div class="mb-2 grid grid-cols-8 gap-2" style="width: 560px;">
+          <select class="col-span-3 border-0 outline-0 rounded cursor-pointer h-8 p-1 text-amber-600" id="difficulty">
+            <option disabled selected>Dificuldade</option>
+            <option value="0">Fácil</option>
+            <option value="1">Médio</option>
+            <option value="2">Díficil</option>
+          </select>
+          <button id="play" class="col-span-2 bg-white text-sm py-1 px-2 h-8 rounded hover:bg-gray-100 text-amber-600 transition">
+            Jogar
+          </button>
+          <div class="col-span-1 bg-white rounded h-8 flex items-center justify-center px-5">
+            <div id="container-general-counter" class="text-amber-600 font-bold">0</div>
+          </div>
+          <div class="col-span-1 bg-white rounded h-8 flex items-center justify-center px-5">
+            <div id="container-right-counter" class="text-green-400 font-bold">0</div>
+          </div>
+          <div class="col-span-1 bg-white rounded h-8 flex items-center justify-center px-5">
+            <div id="container-wrong-counter" class="text-red-400 font-bold">0</div>
+          </div>
+        </div>
+        <div id="board" class="mb-2"></div>
+        <div id="container-alert" class="hidden">alerta</div>
+      </div>
+    </div>
+
+    <script src="utils.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
